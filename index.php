@@ -7,111 +7,116 @@
     <title>Dairy Management System</title>
     <link rel="stylesheet" href="/css/main.css" />
     <style>
-        #wrapper1 {
-            display: flex;
-            z-index: 50px;
-            gap: 20px;
-            position: relative !important;
-            min-height: 100vh;
-            width: 100%;
-            height: fit-content;
-            overflow: hidden;
-            /* border: 2px solid red; */
-            margin-top: -20px !important;
-            margin-left: -60px !important;
-        }
+    body {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    #wrapper1 {
+        display: flex;
+        z-index: 50px;
+        gap: 20px;
+        position: relative !important;
+        min-height: 100vh;
+        width: 95%;
+        margin: auto;
+        height: fit-content;
+        overflow: hidden;
+    }
 
 
-        #navigation {
-            border: 1px solid grey;
-            border-radius: 8px;
-            padding: 10px 10px;
-            overflow: hidden;
-            width: 20%;
-            background-color: #2F3645;
-        }
+    #navigation {
+        border: 1px solid grey;
+        border-radius: 8px;
+        padding: 10px 10px;
+        overflow: hidden;
+        width: 20%;
+        background-color: #2F3645;
+    }
 
-        .nav-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-        }
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        /* width: 100%; */
+    }
 
-        .nav-container li {
-            list-style: none;
-            border-bottom: 1px solid grey;
-            padding: 18px 0px;
-            color: white !important;
+    .nav-container li {
+        list-style: none;
+        border-bottom: 1px solid grey;
+        padding: 18px 0px;
+        color: white !important;
 
-        }
+    }
 
-        .nav-container li a {
-            color: white;
-            font-size: 20px;
-        }
+    .nav-container li a {
+        color: white;
+        font-size: 20px;
+    }
 
-        .container1 {
-            width: 80%;
-            grid-column: span 1;
-            /* border: 2px solid blue; */
-            padding: 0px !important;
-            margin: 0px !important;
-        }
+    .container1 {
+        width: 80%;
+        grid-column: span 1;
+        /* border: 2px solid blue; */
+        padding: 0px !important;
+        margin: 0px !important;
+    }
 
+    .container1 .span {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+        padding: 0px !important;
+        margin: 0px !important;
+
+    }
+
+    .span .span-3 {
+        box-sizing: border-box;
+        margin-bottom: 20px !important;
+        margin: 0px;
+        padding: 0px;
+        border: 1px solid gray;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .span .span-3:hover {
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .span .span-3 img {
+        height: 150px;
+        width: 100%;
+        object-fit: fill;
+    }
+
+
+
+    @media (max-width: 968px) {
         .container1 .span {
-            display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-            padding: 0px !important;
-            margin: 0px !important;
-
         }
 
         .span .span-3 {
-            box-sizing: border-box;
-            margin-bottom: 20px !important;
-            margin: 0px;
-            padding: 0px;
-            border: 1px solid gray;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .span .span-3:hover {
-            box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .span .span-3 img {
-            height: 150px;
+            height: auto;
             width: 100%;
-            object-fit: fill;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .container1 .span {
+            grid-template-columns: 1fr 1fr;
         }
 
-
-
-        @media (max-width: 968px) {
-            .container1 .span {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-
-            .span .span-3 {
-                height: auto;
-                width: 100%;
-            }
+        .span .span-3 {
+            height: auto;
+            width: 100%;
         }
-
-        @media (max-width: 600px) {
-            .container1 .span {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .span .span-3 {
-                height: auto;
-                width: 100%;
-            }
-        }
+    }
     </style>
 </head>
 
@@ -125,15 +130,16 @@
     ?>
 
     <div id="wrapper1">
-        <div id="navigation" class="navbar pull-right">
+        <div id="navigation" class="">
             <div>
-                <h2 style="text-align: start;color:white; padding:0px 20px; padding-bottom:20px;border-bottom:1px solid lightblue; ">
+                <h2
+                    style="text-align: start;color:white; padding:0px 20px; padding-bottom:20px;border-bottom:1px solid lightblue; ">
                     Dashboard</h2>
             </div>
             <ul class="nav-container">
                 <li><a href="<?php echo Page_Url(); ?>">Home</a></li>
                 <li><a href="<?php echo Page_Url(); ?>products/index.php">Products</a></li>
-                <li><a href="<?php echo Page_Url(); ?>supliers/index.php">Supliers</a></li>
+                <li><a href="<?php echo Page_Url(); ?>suppliers/index.php">Supliers</a></li>
                 <li><a href="<?php echo Page_Url(); ?>employees/index.php">Employees</a></li>
                 <li><a href="<?php echo Page_Url(); ?>payment/index.php">Payments</a></li>
                 <li><a href="<?php echo Page_Url(); ?>reports/index.php">Reports</a></li>
@@ -148,7 +154,7 @@
                     </a>
                 </div>
                 <div class="span-3">
-                    <a href='supliers/index.php'>
+                    <a href='suppliers/index.php'>
                         <img src="img/icons/suplier.png" alt="supliers"><br />
                         <strong>Supliers</strong>
                     </a>
@@ -183,3 +189,8 @@
 </body>
 
 </html>
+
+
+<?php
+include("incl/footer.incl.php");
+?>

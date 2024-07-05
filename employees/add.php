@@ -1,14 +1,7 @@
 <?php
 include '../incl/header.incl.php';
 include '../incl/conn.incl.php';
-
-// Check if user is authorized
-// if ($current_user['role'] != 'Manager') {
-//     echo "Sorry, you are not allowed to access this module";
-//     exit();
-// }
-
-$e_payroll_no = '';
+$id = '';
 if (isset($_POST['submitted'])) {
     // Sanitize input data
     foreach ($_POST as $key => $value) {
@@ -16,29 +9,43 @@ if (isset($_POST['submitted'])) {
     }
 
     // Hash the password
-    $hashed_pass = md5($_POST['e_pass']);  // Consider using password_hash() instead
+    $hashed_pass = md5($_POST['password']);  // Consider using password_hash() instead
 
     // Insert into database
-    $sql = "INSERT INTO `employees` (`e_name`, `e_mail`, `e_pass`, `e_role`, `e_payroll_no`)
-            VALUES ('{$_POST['e_name']}', '{$_POST['e_mail']}', '{$hashed_pass}', '{$_POST['e_role']}', '{$_POST['e_payroll_no']}')";
+    $sql = "INSERT INTO `users` (`name`, `email`, `password`, `salary`)
+            VALUES ('{$_POST['name']}', '{$_POST['email']}', '{$hashed_pass}', '{$_POST['salary']}')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        $e_payroll_no = $_POST['e_payroll_no'];
-        echo "Employee added<br />";
-        echo "<a href='index.php'>Back To Employees</a>";
+        $id = mysqli_insert_id($conn);
+        echo '<div style="margin-left: 60px;  padding: 20px 10px;">'; // Applying left margin
+        echo "User added<br />";
+        echo "<a href='index.php'>Back To Users</a>";
+        echo '</div>';
     } else {
         // Handle insertion error
+        echo '<div style="margin-left: 20px;">'; // Applying left margin
         echo "Error: " . mysqli_error($conn);
+        echo '</div>';
     }
 }
 
-// Fetch the employee details after insertion (if needed)
-if (!empty($e_payroll_no)) {
-    $query = "SELECT * FROM `employees` WHERE `e_payroll_no` ='$e_payroll_no'";
+// Fetch the user details after insertion (if needed)
+if (!empty($id)) {
+    $query = "SELECT * FROM `users` WHERE `id` ='$id'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result);
 }
-
-// Include the form
-include 'form.php';
+?>
+<style>
+    .container {
+        width: 90%;
+        margin: auto;
+    }
+</style>
+<div class="container">
+    <?php include 'form.php'; ?>
+</div>
+<?php
+include '../incl/footer.incl.php';
+?>

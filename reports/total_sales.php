@@ -1,88 +1,66 @@
 <?php
 include '../incl/header.incl.php';
 include '../incl/conn.incl.php';
-$start = isset($_REQUEST['from']) ? $_REQUEST['from'] : '';
-$end = isset($_REQUEST['to']) ? $_REQUEST['to'] : '';
 ?>
 
-<h1>Monthly Sales Reports</h1>
-<form class=" form-inline" method="post" action="">
-    <div class="control-group">
-        <label class="control-label" for="from"> From:</label>
-        <div id="datetimepicker1" class="controls input-append date" style="margin-left: 20px">
-            <input class="input-xlarge" type="text" data-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name='from'
-                value='<?php echo $start; ?>' style="padding:10px" />
-            <span class="add-on" style="padding:10px">
-                <i data-time-icon="icon-time" data-date-icon="icon-calendar" </i>
-            </span>
-        </div>
+<div style="width: 90%; margin: auto; padding: 20px 0;">
+    <h1>Total Monthly Sales</h1>
+    <div id="printable">
+        <table class="table table-hover table-striped table-condensed table-bordered">
+            <thead class="">
+                <th>#</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Supplier</th>
+                <th>Cost</th>
+                <th>Status</th>
+                <th>Remarks</th>
+            </thead>
+            <tbody>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `sales`") or trigger_error(mysqli_error($conn));
 
-        <label class="control-label" for="to"> To:</label>
-        <div id="datetimepicker2" class="controls input-append date" style="margin-left: 20px">
-            <input class="input-xlarge" type="text" data-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name='to'
-                value='<?php echo $end; ?>' style="padding:10px" />
-            <span class="add-on" style="padding:10px">
-                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                </i>
-            </span>
-        </div>
-
-        <input type="submit" class="btn btn-info" value="Get Records" style="padding:10px" />
-    </div>
-</form>
-<table class="table table-hover table-striped table-condensed table-bordered">
-    <thead class="">
-        <th>#</th>
-        <th>Farmer NO:</th>
-        <th>Farmer Name:</th>
-        <th>Total KGs:</th>
-    </thead>
-    <tbody>
-        <?php
-        if (isset($_POST['from'])) {
-            $start = mysqli_real_escape_string($conn, $_REQUEST['from']);
-            $end = mysqli_real_escape_string($conn, $_REQUEST['to']);
-
-            $farmers = mysqli_query($conn, "select f_no,f_name from farmers") or die("unable to fetch records" . mysqli_error($conn));
-            $i = 0;
-            $total = 0;
-            while ($farmer = mysqli_fetch_array($farmers)) {
-                //$i+=1;
-                $f_no = $farmer['f_no'];
-                $result = mysqli_query($conn, "SELECT r_kg FROM `delivery` WHERE r_f_no=$f_no and `r_dt` >='$start' and `r_dt` <= '$end'") or trigger_error(mysqli_error($conn));
-
-                $farmer_total = 0;
+                $i = 0;
                 while ($row = mysqli_fetch_array($result)) {
                     foreach ($row as $key => $value) {
                         $row[$key] = stripslashes($value);
                     }
-
-                    $farmer_total += nl2br($row['r_kg']);
+                    $i += 1;
+                    echo "<tr style='padding: 10px;'>";
+                    echo '<td style="padding: 10px;">' . $i . '</td>';
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['name']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['weight']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['supplier']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['cost']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['status']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['remarks']) . "</td>";
+                    echo "</tr>";
                 }
-                $i += 1;
-                $total += $farmer_total;
-                echo "<tr>";
-                echo '<td>' . $i . '</td>';
-                //echo "<td valign='top'>" . nl2br( $row['id']) . "</td>";  
-                echo "<td valign='top'>" . nl2br($farmer['f_no']) . "</td>";
-                echo "<td valign='top'>" . nl2br($farmer['f_name']) . "</td>";
-                echo "<td valign='top'>" . $farmer_total . "</td>";
-                echo "</tr>";
-            }
-            echo "<tr class='success'><td><strong>Total</strong></td><td><strong>All</strong><td>--</td><td>$total Kgs</td></tr>";
-        }
-        ?>
-    </tbody>
-</table>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(function() {
-        $('#datetimepicker1,#datetimepicker2').datetimepicker({
-            language: 'pt-BR',
-            pickTime: false,
-            format: 'yyyy-MM-dd'
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a id="print" class="btn btn-success">Print</a>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#print').on('click', function() {
+                printDiv('printable');
+            });
         });
-    });
-});
-</script>
+
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+</div>
+
 <?php include '../incl/footer.incl.php'; ?>

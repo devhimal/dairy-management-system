@@ -8,45 +8,53 @@ include '../incl/conn.incl.php';
 // }
 ?>
 <style>
-table.table {
-    margin-bottom: 20px;
-}
+    .container {
+        width: 90%;
+        margin: auto;
+    }
 
-table.table td,
-table.table th {
-    padding: 10px;
-}
+    table.table {
+        margin-bottom: 20px;
+    }
+
+    table.table td,
+    table.table th {
+        padding: 10px;
+    }
 </style>
-<a class="btn btn-large btn-primary" href="add.php"><i class="icon-plus icon-white"></i>New Employee</a><br /><br />
-<table class='table table-hover table-striped table-condensed table-bordered'>
-    <thead>
-        <tr>
-            <!-- //<th>Id</th>";  -->
-            <th> Name</th>
-            <th> Mail</th>
-            <!-- //<th> Pass</th>";  -->
-            <th> Role</th>
-            <th> Salary</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM `employees`") or trigger_error(mysqli_error($conn));
-        while ($row = mysqli_fetch_array($result)) {
-            foreach ($row as $key => $value) {
-                $row[$key] = stripslashes($value);
+<div class="container">
+    <a class="btn btn-large btn-primary" href="add.php"><i class="icon-plus icon-white"></i>New User</a><br /><br />
+    <table class='table table-hover table-striped table-condensed table-bordered'>
+        <thead>
+            <tr>
+                <!-- <th>Id</th> -->
+                <th>Name</th>
+                <th>Email</th>
+                <!-- <th>Password</th> -->
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $result = mysqli_query($conn, "SELECT * FROM `users`") or trigger_error(mysqli_error($conn));
+            while ($row = mysqli_fetch_array($result)) {
+                foreach ($row as $key => $value) {
+                    $row[$key] = stripslashes($value);
+                }
+                echo "<tr>";
+                //echo "<td>" . nl2br($row['id']) . "</td>";
+                echo "<td>" . nl2br($row['name']) . "</td>";
+                echo "<td>" . nl2br($row['email']) . "</td>";
+                //echo "<td>" . nl2br($row['password']) . "</td>";
+                echo "<td>" . nl2br($row['salary']) . "</td>";
+                echo "<td><a href=edit.php?id={$row['id']}>Edit</a> | <a href=delete.php?id={$row['id']} style=color:red>Delete</a></td>";
+                echo "</tr>";
             }
-            echo "<tr>";
-            //echo "<td>" . nl2br( $row['id']) . "</td>";  
-            echo "<td>" . nl2br($row['e_name']) . "</td>";
-            echo "<td>" . nl2br($row['e_mail']) . "</td>";
-            //echo "<td>" . nl2br( $row['e_pass']) . "</td>";  
-            echo "<td>" . nl2br($row['e_role']) . "</td>";
-            echo "<td>" . nl2br($row['e_payroll_no']) . "</td>";
-            echo "<td><a href=edit.php?e_payroll_no={$row['e_payroll_no']}>Edit</a> | <a href=delete.php?e_payroll_no={$row['e_payroll_no']} style=color:red>Delete</a></td> ";
-            echo "</tr>";
-        }
-        echo "</tbody></table>";
-        include '../incl/footer.incl.php';
-        ?>
+            ?>
+        </tbody>
+    </table>
+</div>
+<?php
+include '../incl/footer.incl.php';
+?>

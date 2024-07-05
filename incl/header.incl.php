@@ -4,8 +4,8 @@ $current_user = array();
 
 function Page_Url()
 {
-        echo PAGE_URL;
-    }
+    echo PAGE_URL;
+}
 
 //     if (file_exists('auth/auth.php')) {
 //         include 'auth/auth.php';
@@ -68,7 +68,7 @@ function Page_Url()
 <body>
     <!--    The top of the page visible on all pages in the system-->
 
-    <div id="top" class="page-header" style="border:none !important;">
+    <div id="top" class="page-header" style="border:none !important; padding:0px 20px">
 
         <!--top logo-->
         <a href="<?php Page_Url(); ?>"><img src="<?php Page_Url() ?>img/logo1.png" / alt="logo" id="logo"></a>
@@ -76,11 +76,10 @@ function Page_Url()
         <div id="navigation1">
             <h1 id="title">Dairy Management System</h1>
         </div>
-        <div>
+        <div></div>
+        <div style="padding: 14px 18px; border-radius:4px; background-color:orangered;">
+
+            <a href="/Dairy/login/logout.php" style="color:white;font:bold">Logout</a>
 
         </div>
-
-        <!--end navigation-->
     </div>
-    <!--beginning of the pages' body-->
-    <div id="main-content" class="modal-body">
