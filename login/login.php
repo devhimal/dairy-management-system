@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $pass = $_POST['password'];
 
-    $sql = "SELECT id, name, email, password FROM users WHERE name = 'test'";
+    $sql = "SELECT id, name, email, password FROM users WHERE name = 'sajani' || name = 'himani'";
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {

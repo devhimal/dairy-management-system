@@ -29,7 +29,7 @@ include '../incl/conn.incl.php';
                     echo "<tr style='padding: 10px;'>";
                     echo '<td style="padding: 10px;">' . $i . '</td>';
                     echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['name']) . "</td>";
-                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['weight']) . "</td>";
+                    echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['weight']) . " Kg</td>";
                     echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['supplier']) . "</td>";
                     echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['cost']) . "</td>";
                     echo "<td style='padding: 10px; vertical-align: top;'>" . nl2br($row['status']) . "</td>";
@@ -40,27 +40,7 @@ include '../incl/conn.incl.php';
             </tbody>
         </table>
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a id="print" class="btn btn-success">Print</a>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#print').on('click', function() {
-                printDiv('printable');
-            });
-        });
 
-        function printDiv(divName) {
-            var printContents = document.getElementById(divName).innerHTML;
-            var originalContents = document.body.innerHTML;
-
-            document.body.innerHTML = printContents;
-
-            window.print();
-
-            document.body.innerHTML = originalContents;
-        }
-    </script>
 </div>
 
 <?php include '../incl/footer.incl.php'; ?>

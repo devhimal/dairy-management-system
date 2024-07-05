@@ -40,27 +40,6 @@ include '../incl/conn.incl.php';
             </tbody>
         </table>
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a id="print" class="btn btn-success">Print</a>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#print').on('click', function() {
-                printDiv('printable');
-            });
-        });
 
-        function printDiv(divName) {
-            var printContents = document.getElementById(divName).innerHTML;
-            var originalContents = document.body.innerHTML;
 
-            document.body.innerHTML = printContents;
-
-            window.print();
-
-            document.body.innerHTML = originalContents;
-        }
-    </script>
-</div>
-
-<?php include '../incl/footer.incl.php'; ?>
+    <?php include '../incl/footer.incl.php'; ?>

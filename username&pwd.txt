@@ -1,18 +1,2 @@
-cnmuend@yahoo.com
-
-12345
-=================
-supervisor@example.com
-
-supervisor@example.com
-====================
-manager@example.com
-
-manager123
-=================
-
-email:himani@gmail.com (manager)
-pass:123456
-
-
-manager, superviser, clerk
+user1: himani, pass: 12345
+user2: sajani, pass: 12345

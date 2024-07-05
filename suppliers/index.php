@@ -16,13 +16,12 @@ include '../incl/conn.incl.php';
     }
     ?>
     <?php if ($current_user['role'] != 'Clerk') { ?>
-    <a class="btn btn-large btn-primary" href="add.php" style="padding: 20px; margin: 10px 0px;"><i
-            class="icon-plus icon-white"></i>Add suppliers</a><br /><br />
+        <a class="btn btn-large btn-primary" href="add.php" style="padding: 20px; margin: 10px 0px;"><i class="icon-plus icon-white"></i>Add suppliers</a><br /><br />
     <?php } ?>
     <table class="table table-hover table-striped table-condensed table-bordered" style="padding: 10px;">
         <thead class="">
             <tr>
-                <th style="padding: 10px;">#</th>
+                <!-- <th style="padding: 10px;">#</th> -->
                 <th style="padding: 10px;">ID</th>
                 <th style="padding: 10px;">Name</th>
                 <th style="padding: 10px;">Phone</th>
@@ -30,8 +29,8 @@ include '../incl/conn.incl.php';
                 <th style="padding: 10px;">Cost</th>
                 <th style="padding: 10px;">Payment</th>
                 <?php if ($current_user['role'] != 'Clerk') { ?>
-                <th style="text-align: center; padding: 10px; background-color:blue; color:white; font:bold;">Actions
-                </th>
+                    <th style="text-align: center; padding: 10px; background-color:blue; color:white; font:bold;">Actions
+                    </th>
                 <?php } ?>
             </tr>
         </thead>
